@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>uploadvideo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/index2.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/userpage.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css"> <!-- 引入样式 -->
+
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/isUserEmpty.js"></script>
+    <script type="text/javascript" src="/static/js/loadVideoType.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class=" row">
+        <ul class="Title col-lg-12">
+            <li style="float: left;">
+                <img style="width: 40px; height: 40px; top: 5px; opacity:1;  position: relative;" src="../static/images/b.png" >
+            </li>
+            <li class="Ttext">
+                <a href="index" style="color: #000000;text-decoration: none;">首页</a>
+            </li>
+            <li class="Ttext">
+                <a href="https://1367309971.github.io/" style="color: #000000;text-decoration: none;">团队博客</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <input id="unid" th:value="0" type="hidden"/>
+                <a href="tologin" style="color: #000000;text-decoration: none;">登录</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <a href="toregister" style="color: #000000;text-decoration: none;">注册</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <a th:href="@{'toUserpage?uid='+${session.usermessage.uid}}" style="color: #ffffff;text-decoration: none;" th:if="${session.usermessage} ne null"><img style="width: 35px; height: 35px;  opacity:1;  position: relative;" class="img-circle"  th:src='${session.usermessage.userfacepath}' ></a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <input id="uid" th:value="${session.usermessage.uid}" type="hidden"/>
+                <a th:href="@{'doLoginOut?uid='+${session.usermessage.uid}}" style="color: #f44821; text-decoration: none;" th:if="${session.usermessage} ne null"><h4><p style="top: 5px; opacity:1;  position: relative;" th:text="注销"/></h4></a>
+            </li>
+            <li style="float: left; text-decoration: none; list-style-type: none;">
+                <div class="jd_header">
+                    <form action="serarch">
+                        <input type="text" id="SMessage" name="SMessage" class="search" placeholder="搜索..."/>
+                        <input type="submit" class="search_glass"  value="">
+                    </form>
+                </div>
+            </li>
+            <li class="last">
+                <a href="https://1367309971.github.io/" target="_blank" style="color: #000000;text-decoration: none;">关于</a>
+            </li>
+            <li class="send">
+                <a href="toupload" target="_blank" style="color: #fff; text-decoration: none;">投稿</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">收藏</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">记录</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">动态</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">消息</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <form action="uploadVideo" method="post" enctype="multipart/form-data">
+                视频名：<input type="text" name="videoname" id="videoname" placeholder="请输入视频名"/><br>
+                视频类型：<select id="videotype" name="videotype">
+
+                </select><br/>
+                视频简介：<input type="text" name="videoabstract" id="videoabstract" style="width: 630px; height: 70px;" class="form-control" placeholder="请输入视频简介"/><br>
+                视频封面：<input type="file" name="videoface" id="videoface" accept="image/example"><br>
+                视频文件：<input type="file" name="video" id="video" accept="video/H264"/><br><!--video文件格式为MP4-->
+                <input type="hidden" name="userid" id="userid" th:if="${session.usermessage} ne null"th:value="${session.usermessage.uid}"><br>
+                <input type="submit" value="上传视频"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--${value}只能写value,而且不会自动加上引号，适用于排序-->
+<!--#{value}中间写什么都行,而且会自动加上引号，不适用于排序-->
+<mapper namespace="com.bootssmserver.bootssmserver.dao.UseractionMapper">
+
+    <!--查询是否有相应的信息-->
+    <select id="SelectUserAction" parameterType="int" resultType="com.bootssmserver.bootssmserver.entity.Useraction">
+        select * from useraction where uid = #{uid} and vid = #{vid}
+    </select>
+    <insert id="InsertDefaultUseractionMessage" parameterType="com.bootssmserver.bootssmserver.entity.Useraction">
+        insert into useraction values (#{uid},#{vid},0,0,0)
+    </insert>
+    <update id="UpdateUseraction" parameterType="com.bootssmserver.bootssmserver.entity.Useraction">
+        update useraction
+        <trim prefix="set" suffixOverrides=",">
+            <if test="up !=null">
+                up=#{up},
+            </if>
+            <if test="down !=null">
+                down=#{down},
+            </if>
+            <if test="collect !=null">
+                collect=#{collect}
+            </if>
+        </trim>
+        where uid=#{uid} and vid=#{vid}
+    </update>
+
+
+</mapper>

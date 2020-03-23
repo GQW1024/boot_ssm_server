@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <title>VideoPlayer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../static/css/index.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/index2.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/bootstrap.min.css"> <!-- 引入样式 -->
+        <link rel="stylesheet" href="../static/css/page.css" /><!--分页插件-->
+
+        <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+        <script src="/static/js/jquery-3.2.1.min.js"></script>
+        <!-- 包括所有已编译的插件 -->
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="../static/js/index.js"></script>
+        <script src="../static/js/page.js"></script><!--分页插件-->
+        <script src="../static/js/videoplayer.js"></script>
+
+
+    </head>
+    <body class="container-fluid">
+    <div class="row">
+        <ul class="Title col-lg-12">
+            <li style="float: left;">
+                <img style="width: 40px; height: 40px; top: 5px; opacity:1;  position: relative;" src="../static/images/b.png" >
+            </li>
+            <li class="Ttext">
+                <a href="index" style="color: #000000;text-decoration: none;">首页</a>
+            </li>
+            <li class="Ttext">
+                <a href="https://1367309971.github.io/" style="color: #000000;text-decoration: none;">团队博客</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <input id="unid" th:value="0" type="hidden"/>
+                <a href="tologin" style="color: #000000;text-decoration: none;">登录</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <a href="toregister" style="color: #000000;text-decoration: none;">注册</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <a th:href="@{'toUserpage?uid='+${session.usermessage.uid}}" style="color: #ffffff;text-decoration: none;" th:if="${session.usermessage} ne null"><img style="width: 35px; height: 35px; top:5px;  opacity:1;  position: relative;" class="img-circle"  th:src='${session.usermessage.userfacepath}' ></a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <input id="uid" th:value="${session.usermessage.uid}" type="hidden"/>
+                <a th:href="@{'doLoginOut?uid='+${session.usermessage.uid}}" style="color: #f44821; text-decoration: none;" th:if="${session.usermessage} ne null"><h4><p style="top: 5px; opacity:1;  position: relative;" th:text="注销"/></h4></a>
+            </li>
+            <li style="float: left; text-decoration: none; list-style-type: none;">
+                <div class="jd_header">
+                    <form action="serarch">
+                        <input type="text" id="SMessage" name="SMessage" class="search" placeholder="搜索..."/>
+                        <input type="submit" class="search_glass"  value="">
+                    </form>
+                </div>
+            </li>
+            <li class="Ttext last">
+                <a href="https://1367309971.github.io/" target="_blank" style="color: #000000;text-decoration: none;">关于</a>
+            </li>
+            <li class="send">
+                <a href="toupload" target="_blank" style="color: #fff; text-decoration: none;">投稿</a>
+            </li>
+            <li class="Ttext last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">收藏</a>
+            </li>
+            <li class="Ttext last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">记录</a>
+            </li>
+            <li class="Ttext last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">动态</a>
+            </li>
+            <li class="Ttext last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">消息</a>
+            </li>
+        </ul>
+    </div>
+            <div class="message col-lg-8">
+            <ul style="margin:0;padding:0">
+                    <li style="text-decoration: none;list-style-type:none; font-size:18px;margin-bottom:10px;">
+                        <p th:text="${video.videoname}"></p>
+                    </li>
+                    <li style="text-decoration: none; list-style-type:none; font-size:12px; color: rgb(200, 200, 200);margin-bottom:10px;">
+                        <input type="hidden" id="vtype" th:value="${video.videotype}"/>
+                        <p style="display: inline;" th:text="${video.videotype}"></p>&nbsp;&nbsp;&nbsp;&nbsp;<p style="display: inline;" th:text="${video.createdate}"></p>
+                    </li>
+                    <li style="text-decoration: none; list-style-type:none; font-size:12px; color: rgb(200, 200, 200);margin-bottom:10px;">
+                        <p style="display: inline;" th:text="${video.playcount}"></p><p style="display: inline;">播放 · 1.6万弹幕   未经作者授权，禁止转载</p>
+                    </li>
+            </ul>
+            </div>
+            <section class="col-lg-4">
+            <div class="upmenu">
+                <input type="hidden" id="videocreaterID" th:value="${videocreater.uid}"/>
+                <img th:src="${videocreater.userfacepath}" class="img-circle" width="65px" height="65px" style="float: left;"/>
+                <p style="float: left; position: relative; top:7px; color: rgb(241, 138, 207);" th:text="${videocreater.username}"></p>
+                <img src="../static/images/message.png" width="14px" height="14px" style="position: relative; top:12px; float: left; margin-left:8px; margin-right:2px;"/>
+                <p style="float: left; position: relative; top:10px; color:#cdcdcd; font-size:12px;">发消息</p>
+                <br/>
+                <p style="float: left; position: relative; top:10px; color:#cdcdcd; font-size:13px;">微勃er：weibo.com/573244552</p>
+                <br/>
+                <button id="charge" class="charge">充电</button>
+                <input id="isfollow" type="hidden" th:value="${followmessage.isconcerned}"/>
+                <input type="button" id="follow" onclick="javascript:OnFollowClick()" class="follow" value="+ 关注 191.1万"></input>
+                <br/>
+                <div class="container">
+                        <a href="#"><img id="img2" width="350px;" height="200px" src="../static/images/2.png" style="position: absolute; top:140px; left: 20px;"/></a>
+                        <a href="#"><img id="img" class="photo" width="350px;" height="200px" src="../static/images/3.png" style="position: relative; top:60px; left: 20px;" /></a>
+                </div>
+                    <p style="position: relative; top:80px; left:20px;">相关推荐</p>
+                    <ul id="videolist" style="position: relative; top:90px; left:20px; margin:10px; list-style-type: none;">
+<!--                            <li style="float: left;">-->
+<!--                                <img src="../static/images/a.png" width="165px" height="85px" style=" float: left; margin-bottom:10px;"/>-->
+<!--                                <h4 class="videotitle">王老菊猎人10：抱得美人归</h4>-->
+<!--                                <p class="littleTitle"> 怕上火暴王老菊 </p>-->
+<!--                                <p class="littleTitle">63.4万播放 · 1.4万弹幕</p>-->
+<!--                            </li>-->
+                    </ul>
+            </div>
+          </section>
+            <section class="row">
+                <script type="text/javascript">
+                    // $(function () {
+                    //   $("#video").finish(function () {
+                    //       $("#video").attr("src",$(document.documentURI.videopath))
+                    //   })
+                    // })
+                </script>
+            <video id="video" class="video col-lg-9" width="850px" height="500px" controls>
+                <input type="hidden" th:value="${video.vid}" id="vid">
+                <source id="videosource" th:src="${video.videopath}" type="video/mp4"/>
+            </video>
+                <br/>
+                <ul>
+                    <li id="up" class="col-lg-4" style="display: inline-block;">
+                        <input id="isup" th:value="${useraction.up}" type="hidden">
+                        <img id="upimage" onclick="javascript:OnUpClick()" style="width: 40px; height: 40px;" src="../static/images/up1.png"/><h5 id="upcount" th:text="${video.putcount}"></h5>
+                    </li>
+                    <li id="collect" class="col-lg-4" style="display: inline-block;">
+                        <input id="iscollect" th:value="${useraction.collect}" type="hidden">
+                        <img id="collectimage" onclick="javascript:OnCollectClick()" style="width: 40px; height: 40px;" src="../static/images/collect1.png"/><h5 id="collectcount" th:text="${video.collectcount}"></h5>
+                    </li>
+                    <li id="down" class="col-lg-4" style="display: inline-block;">
+                        <input id="isdown" th:value="${useraction.down}" type="hidden">
+                        <img id="downimage" onclick="javascript:OnDownClick()" style="width: 40px; height: 40px;" src="../static/images/down1.png"/><h5 id="downcount" th:text="${video.downcount}"></h5>
+                    </li>
+                    <li id="abstract" class="col-lg-9" style="display: inline-block;">
+                        <h3>简介：</h3>
+                         <pre id="abstractMessage" th:text="${video.videoabstract}" style="font-size:14px; width:600px; height: auto; white-space:pre-wrap;word-break: break-word;">
+                        </pre>
+                    </li>
+                    <li id="diss" class="col-lg-9" style="display: inline-block;">
+                        <h3>发表评论</h3>
+                            <textarea id="dissmessage" style="width: 630px; height: 70px;" class="form-control" rows="3"></textarea>
+                        <button type="button" class="send text-center">发表评论</button>
+                        <hr>
+                        <strong>热门评论</strong>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Newest"> 最新
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Hottest"> 最热
+                        </label>
+                        <hr>
+                        <table class="table table-responsive">
+                            <tbody id="Alldiss" class="table table-responsive">
+                                <tr>
+                                    <td style="display: table-row; margin: 20px;">
+                                        <img style="width: 35px; height: 35px; top: 10px;  position: relative;" class="img-rounded" src="../static/images/a.png">
+                                        <strong>：</strong>
+                                        <pre id="user1dissMessage" style="font-size:14px; float: right; width:600px; height: auto; white-space:pre-wrap;word-break: break-word;">
+                                            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+                                            <strong style=" float: right; ">
+                                                <div style="float: right; display: inline;">
+                                                    <p style="float: right; display: inline;">(11)</p><a href="#" style="float: right; display: inline;">点赞</a>
+                                                    <p style="float: right; display: inline;">(11)</p><a href="#" style="float: right; display: inline;">踩</a></div>
+                                            </strong>
+                                        </pre>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </section>
+    </body>
+</html>

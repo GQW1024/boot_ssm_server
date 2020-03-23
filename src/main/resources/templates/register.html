@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css"> <!-- 引入样式 -->
+
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/isUserEmpty.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <form action="doregister" method="post" enctype="multipart/form-data">
+                昵称：<input type="text" name="username" id="username" placeholder="请输入姓名"/><span id="userinfo2"></span><br>
+                选取头像：<input type="file" name="userface" id="userface" accept="image/example"><br>
+                账号：<input type="text" name="useraccnum" id="registeruseraccnum" placeholder="请输入账号"/><span id="userinfo1"></span><br>
+                密码：<input type="password" name="userpass" id="userpass" placeholder="请输入密码"/><br>
+                确认密码：<input type="password" name="userpass2" id="userpass2" placeholder="请确认密码"/><br>
+                <input type="hidden" name="uploadType" id="uploadType" value="USERFACE"><br>
+                <input type="submit" value="注册"/><a class="h4" href="tologin" >点击登录</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

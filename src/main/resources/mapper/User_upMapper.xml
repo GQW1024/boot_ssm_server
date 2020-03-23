@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--${value}只能写value,而且不会自动加上引号，适用于排序-->
+<!--#{value}中间写什么都行,而且会自动加上引号，不适用于排序-->
+<mapper namespace="com.bootssmserver.bootssmserver.dao.User_upMapper">
+
+    <!--查询是否关注-->
+    <select id="SelectisFollow" parameterType="int" resultType="com.bootssmserver.bootssmserver.entity.User_up">
+        select * from user_up where uid = #{uid} and upid = #{upid}
+    </select>
+    <insert id="InsertDefaultFollowMessage" parameterType="com.bootssmserver.bootssmserver.entity.User_up">
+        insert into user_up values (#{uid},#{upid},0,0)
+    </insert>
+    <update id="UpdateisFollow" parameterType="int">
+        update user_up set isconcerned=#{isfollow} where uid=#{uid} and upid=#{upid}
+    </update>
+    <select id="SelectFollowCount" parameterType="int" resultType="int">
+        select count(*) from user_up where uid = #{uid}
+    </select>
+
+</mapper>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/index2.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/userpage.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css"> <!-- 引入样式 -->
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        h1{
+            color: #ffffff;
+        }
+        h2{
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="container-fluid row">
+        <ul class="Title col-lg-12">
+            <li style="float: left;">
+                <img style="width: 40px; height: 40px; top: 5px; opacity:1;  position: relative;" src="../static/images/b.png" >
+            </li>
+            <li class="Ttext">
+                <a href="index" style="color: #000000;text-decoration: none;">首页</a>
+            </li>
+            <li class="Ttext">
+                <a href="https://1367309971.github.io/" style="color: #000000;text-decoration: none;">团队博客</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <input id="unid" th:value="0" type="hidden"/>
+                <a href="tologin" style="color: #000000;text-decoration: none;">登录</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} eq null">
+                <a href="toregister" style="color: #000000;text-decoration: none;">注册</a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <a th:href="@{'toUserpage?uid='+${session.usermessage.uid}}" style="color: #ffffff;text-decoration: none;" th:if="${session.usermessage} ne null"><img style="width: 35px; height: 35px;  opacity:1;  position: relative;" class="img-circle"  th:src='${session.usermessage.userfacepath}' ></a>
+            </li>
+            <li class="Ttext" th:if="${session.usermessage} ne null">
+                <input id="uid" th:value="${session.usermessage.uid}" type="hidden"/>
+                <a th:href="@{'doLoginOut?uid='+${session.usermessage.uid}}" style="color: #f44821; text-decoration: none;" th:if="${session.usermessage} ne null"><h4><p style="top: 5px; opacity:1;  position: relative;" th:text="注销"/></h4></a>
+            </li>
+            <li style="float: left; text-decoration: none; list-style-type: none;">
+                <div class="jd_header">
+                    <form action="serarch">
+                        <input type="text" id="SMessage" name="SMessage" class="search" placeholder="搜索..."/>
+                        <input type="submit" class="search_glass"  value="">
+                    </form>
+                </div>
+            </li>
+            <li class="last">
+                <a href="https://1367309971.github.io/" target="_blank" style="color: #000000;text-decoration: none;">关于</a>
+            </li>
+            <li class="send">
+                <a href="toupload" target="_blank" style="color: #fff; text-decoration: none;">投稿</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">收藏</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">记录</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">动态</a>
+            </li>
+            <li class="last">
+                <a href="https://www.3dmgame.com/" target="_blank" style="color: #000000;text-decoration: none;">消息</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1">
+            <a href="updateface" style="color: #ffffff; text-decoration: none;" th:if="${session.usermessage} ne null"><img  class="img-circle userface1"  th:src='${session.usermessage.userfacepath}' ></a>
+            <a href="updateface" style="color: #ffffff; text-decoration: none;" th:if="${session.usermessage} eq null"><img  class="img-circle userface1"  src='../static/images/a.png' ></a>
+<!--        <h1 style="font-family: 汉仪铸字木头人W;">KeyWord</h1><h1 id="keyword">111</h1>-->
+        </div>
+        <div class="col-lg-3 col-lg-offset-1"style="background-color: #27c4f5;">
+            <table>
+                <tr>
+                    <td><h2>昵称：</h2></td>
+                    <td  th:if="${session.usermessage} ne null">
+                        <h2 id="uname" th:text="${session.usermessage.username}"></h2>
+                    </td>
+                    <td  th:if="${session.usermessage} eq null">
+                        <h2 id="defaultuname">defaultname</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h2>关注数：</h2></td>
+                    <td><h2 th:text="${followcount}"></h2></td>
+                </tr>
+                <tr>
+                    <td><h2>粉丝数：</h2></td>
+                    <td  th:if="${session.usermessage} ne null">
+                        <h2 id="fancount" th:text="${session.usermessage.fancount}"></h2>
+                    </td>
+                    <td  th:if="${session.usermessage} eq null">
+                        <h2 id="defaultfancount">0</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h2>收藏数：</h2></td>
+                    <td><h2 th:text="${collectcount}"></h2></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="background-color: #27c4f5; top: 10px;position: relative;">
+        <div class="col-lg-3 col-lg-offset-1">
+            <table>
+                <tr>
+                    <td>
+                        <h1>我的作品</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>我的收藏</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>我的粉丝</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>视频上传</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>最近观看</h1>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-7"style="background-color: #f584b2;">
+            <table>
+                <tr>
+                    <td rowspan="5">
+                        <h1>内容显示</h1>
+                        <h1>.</h1>
+                        <h1>.</h1>
+                        <h1>.</h1>
+                        <h1>.</h1>
+                        <h1>.</h1>
+                    </td>
+                </tr>
+                <tbody id="needVideo">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

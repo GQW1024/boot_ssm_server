@@ -1,0 +1,237 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.continues{
+    width:100%;
+    height:1000px;
+    margin: 0 auto;
+}
+/*导航条*/
+.Title{
+    width:100%;
+    height: 50px;
+    background-color: #fff;
+    border: rgb(240, 232, 232);;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+}
+.Ttext{
+    color: #000;
+    list-style-type:none;
+    float: left;
+    line-height: 50px;
+    opacity:0.5;
+    width:100px;
+    text-align:center;
+}
+.Ttext:hover{
+    opacity: 1;
+}
+.last{
+    color: #000;
+    list-style-type:none;
+    float: right;
+    opacity:0.5;
+    width:60px;
+    line-height: 50px;
+    font-size: 15px;
+    text-align:center;
+}
+.jd_header {
+    box-sizing: border-box;
+    position: relative;
+    height: 45px;
+    width: 500px;
+    left:50px;
+    padding-right: 20px;
+    overflow: hidden;
+    z-index: 50;
+    border-radius: 17px;
+    background-color: rgb(240, 232, 232);
+}
+.search {
+    box-sizing: border-box;
+    padding-left: 10px;
+    top:5px;
+    width: 4500px;
+    height: 40px;
+    margin-top: 4px;
+    border-radius: 17px;
+    background-color: rgb(240, 232, 232);
+    color: #999;
+    border: none;
+}
+.search_glass {
+    display: inline-block;
+    position: absolute;
+    right: 36px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    background: url('../images/finds.png')no-repeat;
+    background-size: 16px 16px;
+}
+.send{
+    width:60px;
+    height:65px;
+    padding-top:15px;
+    text-align: center;
+    color: #fff;
+    float: right;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color:#f656a5;
+}
+.message{
+    position: absolute;
+    left:12%;
+    top:70px;
+    width:50%;
+    height:100px;
+}
+.video{
+    float: left;
+    position: absolute;
+    left:10%;
+    top:150px;
+}
+.upmenu{
+    float: right;
+    width:400px;
+    height:100%;
+    position:absolute;
+    top: 70px;
+    left:67%;
+}
+.upmenu .charge{
+    width:80px;
+    height:37px;
+    position: relative;
+    top: 12px;
+    color: #f656a5;
+    border: #f656a5;
+    background-color: #fff;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+}
+.upmenu .charge:hover{
+    width:80px;
+    height:37px;
+    position: relative;
+    top: 12px;
+    color: #fff;
+    border: #f656a5;
+    background-color: #f656a5;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+}
+.upmenu .follow{
+    width: 195px;
+    height: 38px;
+    color: #fff;
+    position: relative;
+    top: 12px;
+    background: rgb(76, 165, 216);
+    border-width: 0px 0px 0px 0px;
+}
+.upmenu .follow:hover{
+    width: 195px;
+    height: 38px;
+    color: #fff;
+    position: relative;
+    top: 12px;
+    background: rgb(87, 187, 245);
+    border-width: 0px 0px 0px 0px;
+}
+.upmenu .select{
+    width: 333px;
+    height: 42px;
+    left:12px;
+    color: #000;
+    position: relative;
+    top: 12px;
+    padding-left:15px;
+    font-size: 17px;
+    background: rgb(241, 245, 247);
+    border-width: 0px 0px 0px 0px;
+}
+.container {
+	width: 350px;
+	height: auto;
+	
+}
+.photo {
+	width: 350px;
+    animation: switch 5s ease-out infinite alternate;
+    -webkit-animation: switch 5s ease-in-out infinite alternate;
+}
+ 
+@keyframes switch {
+    0%{
+        opacity:1;
+    }
+    25%{
+        opacity:0;
+    }
+    50%{
+        opacity:0;
+    }
+	75%{
+        opacity:1;
+	}
+}
+.videotitle{
+    float: left;
+    font-size: 17px;
+    color: rgb(107, 101, 101);
+    position: relative;
+    left:10px;
+}
+.littleTitle{
+    float: left;
+    margin-top:10px;
+    font-size: 13px;
+    position: relative;
+    left:10px;
+    color: rgb(214, 206, 206);
+}
+#up{
+    float: left;
+    width: 40px;
+    height: 40px;
+    top: 600px;
+    left: 170px;
+    position:relative;
+}
+#collect{
+    float: left;
+    width: 40px;
+    height: 40px;
+    top: 600px;
+    left: 200px;
+    position:relative;
+}
+#down{
+    float: left;
+    width: 40px;
+    height: 40px;
+    top: 600px;
+    left: 230px;
+    position:relative;
+}
+#abstract{
+    float: left;
+    width: 120px;
+    height: 60px;
+    top: 590px;
+    left: 250px;
+    position:relative;
+}
+#diss{
+    float: left;
+    width: 700px;
+    height: auto;
+    top: 750px;
+    position:relative;
+}

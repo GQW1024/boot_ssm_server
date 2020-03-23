@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--${value}只能写value,而且不会自动加上引号，适用于排序-->
+<!--#{value}中间写什么都行,而且会自动加上引号，不适用于排序-->
+<mapper namespace="com.bootssmserver.bootssmserver.dao.UserMapper">
+    <!--<cache/>声明此namespace(全局)开启二级缓存（Mybatis自带）,用的时候记得session.close-->
+    <select id="SelectUserByCodeandPass" parameterType="String" resultType="com.bootssmserver.bootssmserver.entity.User">
+       select * from user where useraccnum = #{useraccnum} and userpass = #{userpass}
+    </select>
+    <!--查询用户名是否存在-->
+    <select id="SelectByUseraccnum" parameterType="String" resultType="com.bootssmserver.bootssmserver.entity.User">
+       select * from user where useraccnum = #{useraccnum}
+    </select>
+    <!--查询用户昵称是否存在-->
+    <select id="SelectByUsername" parameterType="String" resultType="com.bootssmserver.bootssmserver.entity.User">
+       select * from user where username = #{username}
+    </select>
+    <!--按vid查找视频作者-->
+    <select id="SelectByupid" parameterType="int" resultType="com.bootssmserver.bootssmserver.entity.User">
+       select * from user where upid = #{upid}
+    </select>
+    <insert id="registerUser" parameterType="com.bootssmserver.bootssmserver.entity.User">
+        insert into user(username,userfacepath,useraccnum,userpass) values (#{username},#{userfacepath},#{useraccnum},#{userpass})
+    </insert>
+    <insert id="registerUserNoFace" parameterType="com.bootssmserver.bootssmserver.entity.User">
+        insert into user(username,useraccnum,userpass) values (#{username},#{useraccnum},#{userpass})
+    </insert>
+    <update id="registerUserFace" parameterType="com.bootssmserver.bootssmserver.entity.User">
+        UPDATE user SET userfacepath=#{userfacepath} where uid = #{uid}
+    </update>
+    <update id="updataisRegister" parameterType="int">
+        UPDATE user SET isregister=#{isregister} where uid = #{uid}
+    </update>
+    <update id="updataUPID" parameterType="int">
+        UPDATE user SET upid=#{upid},cid=#{cid} where uid = #{uid}
+    </update>
+    <update id="updataUserFanCount" parameterType="int">
+        UPDATE user SET fancount=#{fancount} where uid = #{uid}
+    </update>
+
+
+</mapper>

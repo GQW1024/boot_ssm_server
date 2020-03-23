@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--${value}只能写value,而且不会自动加上引号，适用于排序-->
+<!--#{value}中间写什么都行,而且会自动加上引号，不适用于排序-->
+<mapper namespace="com.bootssmserver.bootssmserver.dao.CollectMapper">
+    <!--注册用户收藏夹-->
+    <insert id="insertCollect" parameterType="com.bootssmserver.bootssmserver.entity.Collect">
+        insert into collect values (#{cid},#{vid},#{videoname},#{videopath},#{videocreater})
+    </insert>
+    <delete id="DeleteCollect" parameterType="int">
+        DELETE from collect where cid=#{cid} and vid = #{vid}
+    </delete>
+    <select id="SelectCollect" parameterType="int" resultType="com.bootssmserver.bootssmserver.entity.Collect">
+        select * from collect where cid=#{cid} and vid = #{vid}
+    </select>
+    <select id="SelectCollectCount" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from collect where cid=#{cid}
+    </select>
+</mapper>
